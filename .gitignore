@@ -4,6 +4,7 @@
 /package-lock.json
 /yarn.lock
 /.env
+/.vs
 
 # .Net specific
 /bin
