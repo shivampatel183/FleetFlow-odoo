@@ -24,7 +24,6 @@ import { AuthService } from '../../services/auth.service';
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav mode="side" opened class="sidenav glass-card">
         <div class="logo-container">
-          <div class="logo-icon">🚀</div>
           <div class="logo-text">Fleet<span>Flow</span></div>
         </div>
         
@@ -103,6 +102,8 @@ import { AuthService } from '../../services/auth.service';
       margin: 12px;
       height: calc(100vh - 24px) !important;
       border-radius: 20px !important;
+      background: #1e293b !important;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
     }
     
     .logo-container { 
@@ -111,14 +112,14 @@ import { AuthService } from '../../services/auth.service';
       align-items: center; 
       gap: 12px;
     }
-    .logo-icon { font-size: 2rem; }
     .logo-text { 
-      font-size: 1.5rem; 
-      font-weight: 800; 
-      color: #f8fafc;
-      letter-spacing: -1px;
+      font-size: 1.75rem; 
+      font-weight: 900; 
+      color: #818cf8;
+      letter-spacing: -1.5px;
+      line-height: 1;
     }
-    .logo-text span { color: #6366f1; }
+    .logo-text span { color: #6366f1; font-weight: 400; }
     
     .user-profile {
       padding: 0 24px 24px;
@@ -139,43 +140,51 @@ import { AuthService } from '../../services/auth.service';
       font-weight: 700;
       color: white;
     }
-    .user-name { font-weight: 600; color: #f8fafc; font-size: 0.95rem; }
-    .user-role { font-size: 0.75rem; color: #94a3b8; }
+    .user-name { font-weight: 700; color: white !important; font-size: 1rem; }
+    .user-role { font-size: 0.8rem; color: rgba(255,255,255,0.7) !important; }
     
     .nav-list { flex: 1; padding: 0 12px; }
     .nav-label { 
       padding: 24px 12px 8px; 
-      font-size: 0.7rem; 
+      font-size: 0.75rem; 
       text-transform: uppercase; 
-      letter-spacing: 0.1em; 
-      color: #64748b; 
-      font-weight: 700;
+      letter-spacing: 0.12em; 
+      color: white !important; 
+      font-weight: 800;
+      opacity: 0.9;
     }
     
     .mat-nav-list a { 
-      color: #94a3b8; 
       margin-bottom: 4px;
       border-radius: 12px !important;
       transition: all 0.2s ease;
     }
-    .mat-nav-list a:hover { 
-      color: #f8fafc; 
-      background: rgba(255,255,255,0.05);
-    }
-    .active { 
-      color: #f8fafc !important; 
-      background: rgba(99, 102, 241, 0.15) !important;
-      border: 1px solid rgba(99, 102, 241, 0.2);
-    }
-    .active mat-icon { color: #6366f1; }
     
-    .logout-section { padding: 24px; }
+    /* Aggressive white forcing for icons and text */
+    ::ng-deep .sidenav .mat-mdc-list-item-title,
+    ::ng-deep .sidenav .mat-mdc-list-item-icon,
+    ::ng-deep .sidenav mat-icon,
+    ::ng-deep .sidenav span {
+      color: white !important;
+    }
+
+    .mat-nav-list a:hover { 
+      background: rgba(255,255,255,0.1) !important;
+    }
+    
+    .active { 
+      background: rgba(99, 102, 241, 0.25) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    .logout-section { padding: 24px; border-top: 1px solid rgba(255,255,255,0.05); }
     .logout-btn { 
       width: 100%; 
       text-align: left; 
-      color: #f43f5e; 
+      color: #fb7185 !important; 
       border-radius: 12px !important;
     }
+    .logout-btn mat-icon { color: #fb7185 !important; }
     
     .main-content { padding: 12px 24px 24px 12px; }
     .main-header {
