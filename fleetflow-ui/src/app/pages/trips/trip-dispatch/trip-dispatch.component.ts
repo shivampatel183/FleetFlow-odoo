@@ -26,92 +26,113 @@ import { MatIconModule } from '@angular/material/icon';
     <div class="page-container">
       <div class="list-header">
         <div class="header-info">
-          <h1>Trip Dispatch Center</h1>
-          <p>Authorize and monitor transport logistics operations</p>
+          <h1>Logistics Command Center</h1>
+          <p>Strategic authorization and real-time fleet deployment oversight</p>
         </div>
       </div>
 
       <div class="dispatch-layout">
-        <div class="dispatch-form-card glass-card">
+        <div class="command-section glass-card">
           <div class="card-header">
-            <h3>New Trip Authorization</h3>
+            <h3><mat-icon>verified_user</mat-icon> New Mission Authorization</h3>
           </div>
+          
           <form [formGroup]="dispatchForm" (ngSubmit)="onSubmit()" class="premium-form">
-            <div class="form-row-grid">
-              <mat-form-field appearance="outline">
-                <mat-label>Select Assigned Vehicle</mat-label>
-                <mat-select formControlName="vehicleId">
-                  <mat-option *ngFor="let v of availableVehicles" [value]="v.id">
-                    {{v.licensePlate}} - {{v.model}}
-                  </mat-option>
-                </mat-select>
-                <mat-icon matSuffix>local_shipping</mat-icon>
-              </mat-form-field>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <mat-form-field appearance="outline">
+                  <mat-label>Designated Vehicle</mat-label>
+                  <mat-select formControlName="vehicleId">
+                    <mat-option *ngFor="let v of availableVehicles" [value]="v.id">
+                      <div class="option-content">
+                        <span class="plate">{{v.licensePlate}}</span>
+                        <span class="model">{{v.model}}</span>
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>local_shipping</mat-icon>
+                </mat-form-field>
+              </div>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Select Assigned Driver</mat-label>
-                <mat-select formControlName="driverId">
-                  <mat-option *ngFor="let d of availableDrivers" [value]="d.id">
-                    {{d.name}}
-                  </mat-option>
-                </mat-select>
-                <mat-icon matSuffix>person</mat-icon>
-              </mat-form-field>
-            </div>
+              <div class="form-group full-width">
+                <mat-form-field appearance="outline">
+                  <mat-label>Assigned Operator</mat-label>
+                  <mat-select formControlName="driverId">
+                    <mat-option *ngFor="let d of availableDrivers" [value]="d.id">
+                      {{d.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-icon matSuffix>person</mat-icon>
+                </mat-form-field>
+              </div>
 
-            <div class="form-row-grid">
-              <mat-form-field appearance="outline">
-                <mat-label>Cargo Weight (kg)</mat-label>
-                <input matInput type="number" formControlName="cargoWeight">
-                <mat-icon matSuffix>weight</mat-icon>
-              </mat-form-field>
+              <div class="form-group">
+                <mat-form-field appearance="outline">
+                  <mat-label>Cargo Payload (kg)</mat-label>
+                  <input matInput type="number" formControlName="cargoWeight">
+                  <mat-icon matSuffix>monitor_weight</mat-icon>
+                </mat-form-field>
+              </div>
               
-              <mat-form-field appearance="outline">
-                <mat-label>Estimated Revenue ($)</mat-label>
-                <input matInput type="number" formControlName="revenue">
-                <mat-icon matSuffix>payments</mat-icon>
-              </mat-form-field>
+              <div class="form-group">
+                <mat-form-field appearance="outline">
+                  <mat-label>Est. Mission Revenue ($)</mat-label>
+                  <input matInput type="number" formControlName="revenue">
+                  <mat-icon matSuffix>payments</mat-icon>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field appearance="outline">
+                  <mat-label>Origin Point</mat-label>
+                  <input matInput formControlName="startLocation" placeholder="Departure Hub">
+                  <mat-icon matSuffix>location_on</mat-icon>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group">
+                <mat-form-field appearance="outline">
+                  <mat-label>Final Destination</mat-label>
+                  <input matInput formControlName="endLocation" placeholder="Arrival Terminal">
+                  <mat-icon matSuffix>flag</mat-icon>
+                </mat-form-field>
+              </div>
             </div>
 
-            <div class="form-row-grid">
-              <mat-form-field appearance="outline">
-                <mat-label>Origin Location</mat-label>
-                <input matInput formControlName="startLocation" placeholder="e.g. Central Hub">
-                <mat-icon matSuffix>location_on</mat-icon>
-              </mat-form-field>
-
-              <mat-form-field appearance="outline">
-                <mat-label>Destination</mat-label>
-                <input matInput formControlName="endLocation" placeholder="e.g. Port Authority">
-                <mat-icon matSuffix>flag</mat-icon>
-              </mat-form-field>
-            </div>
-
-            <div class="dispatch-btn-container">
-              <button mat-raised-button class="btn-primary" type="submit" [disabled]="dispatchForm.invalid">
-                <mat-icon>send</mat-icon>
-                <span>Authorize & Dispatch</span>
+            <div class="action-footer">
+              <button mat-flat-button class="btn-dispatch" type="submit" [disabled]="dispatchForm.invalid || isSubmitting">
+                <mat-icon *ngIf="!isSubmitting">bolt</mat-icon>
+                <span *ngIf="!isSubmitting">Authorize & Dispatch Mission</span>
+                <span *ngIf="isSubmitting">Processing Authorization...</span>
               </button>
             </div>
           </form>
         </div>
 
-        <div class="active-trips-card glass-card">
+        <div class="monitor-section glass-card">
            <div class="card-header">
-             <h3>Real-time Active Trips</h3>
+             <h3><mat-icon>sensors</mat-icon> Live Deployment Monitor</h3>
            </div>
            <div class="active-trip-list">
               <div class="active-trip-item" *ngFor="let trip of activeTrips">
-                 <div class="trip-icon">🚛</div>
-                 <div class="trip-info">
-                    <div class="trip-path">{{trip.startLocation}} → {{trip.endLocation}}</div>
-                    <div class="trip-meta">{{trip.vehiclePlate}} · {{trip.driverName}}</div>
+                 <div class="trip-visual">
+                    <div class="pulse-ring"></div>
+                    <mat-icon>navigation</mat-icon>
                  </div>
-                 <div class="status-pill status-ontrip">En Route</div>
+                 <div class="trip-details">
+                    <div class="trip-route">{{trip.startLocation}} <mat-icon>east</mat-icon> {{trip.endLocation}}</div>
+                    <div class="trip-assets">
+                      <span class="asset-pill"><mat-icon>local_shipping</mat-icon> {{trip.vehiclePlate}}</span>
+                      <span class="asset-pill"><mat-icon>person</mat-icon> {{trip.driverName}}</span>
+                    </div>
+                 </div>
+                 <div class="trip-badge">ACTIVE</div>
               </div>
-              <div *ngIf="activeTrips.length === 0" class="empty-status">
-                 <mat-icon>map</mat-icon>
-                 <p>No active missions found</p>
+              
+              <div *ngIf="activeTrips.length === 0" class="monitor-empty">
+                 <mat-icon>satellite_alt</mat-icon>
+                 <p>No active missions on radar</p>
+                 <span>Authorize a mission to begin tracking</span>
               </div>
            </div>
         </div>
@@ -120,39 +141,74 @@ import { MatIconModule } from '@angular/material/icon';
   `,
   styles: [`
     .page-container { animation: fadeIn 0.4s ease-out; }
-    .list-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; }
-    .header-info h1 { margin: 0 0 4px; font-size: 1.75rem; }
-    .header-info p { margin: 0; color: #64748b; font-size: 0.95rem; }
+    .list-header { margin-bottom: 32px; }
+    .header-info h1 { margin: 0 0 4px; font-size: 2rem; color: #f8fafc; font-weight: 800; }
+    .header-info p { margin: 0; color: #94a3b8; font-size: 1rem; }
 
-    .dispatch-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
-    .dispatch-form-card { padding: 32px; }
-    .card-header h3 { margin: 0 0 24px; font-size: 1.1rem; color: #f8fafc; }
+    .dispatch-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 28px; }
     
-    .premium-form { display: flex; flex-direction: column; gap: 8px; }
-    .form-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .command-section, .monitor-section { padding: 32px; height: fit-content; }
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
+    .card-header h3 { margin: 0; font-size: 1.2rem; color: #f8fafc; display: flex; align-items: center; gap: 10px; }
+    .card-header mat-icon { color: #f8fafc; }
     
-    .dispatch-btn-container { margin-top: 24px; }
-    .btn-primary { padding: 24px !important; width: 100%; font-size: 1rem !important; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .full-width { grid-column: span 2; }
+    
+    .option-content { display: flex; flex-direction: column; }
+    .plate { font-weight: 700; color: #f8fafc; }
+    .model { font-size: 0.75rem; color: #94a3b8; }
+    
+    .action-footer { margin-top: 32px; }
+    .btn-dispatch { 
+      padding: 28px !important; 
+      width: 100%; 
+      font-size: 1.05rem !important; 
+      font-weight: 700 !important; 
+      background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
+      color: white !important;
+      border-radius: 14px !important;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3) !important;
+    }
+    .btn-dispatch:disabled { background: rgba(255,255,255,0.05) !important; opacity: 0.5; }
 
-    .active-trips-card { padding: 24px; }
-    .active-trip-list { display: flex; flex-direction: column; gap: 16px; }
+    .active-trip-list { display: flex; flex-direction: column; gap: 18px; }
     .active-trip-item { 
-      padding: 16px; 
-      background: rgba(255,255,255,0.03); 
-      border-radius: 12px; 
+      padding: 20px; 
+      background: rgba(255,255,255,0.02); 
+      border-radius: 16px; 
       display: flex; 
       align-items: center; 
-      gap: 16px;
-      border: 1px solid rgba(255,255,255,0.05);
+      gap: 20px;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.3s ease;
     }
-    .trip-icon { font-size: 1.5rem; }
-    .trip-info { flex: 1; }
-    .trip-path { font-size: 0.9rem; font-weight: 600; color: #f8fafc; }
-    .trip-meta { font-size: 0.75rem; color: #64748b; }
-    .empty-status { padding: 48px; text-align: center; color: #64748b; opacity: 0.5; }
-    .empty-status mat-icon { font-size: 32px; width: 32px; height: 32px; }
+    .active-trip-item:hover { background: rgba(255,255,255,0.04); transform: translateX(4px); }
+    
+    .trip-visual { position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(99, 102, 241, 0.1); border-radius: 12px; }
+    .trip-visual mat-icon { color: #6366f1; font-size: 20px; transform: rotate(45deg); }
+    .pulse-ring { position: absolute; width: 100%; height: 100%; border: 2px solid #6366f1; border-radius: 12px; animation: pulse 2s infinite; opacity: 0; }
+    
+    @keyframes pulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.4); opacity: 0; } }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .trip-details { flex: 1; }
+    .trip-route { font-size: 1rem; font-weight: 700; color: #f8fafc; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .trip-route mat-icon { font-size: 16px; width: 16px; height: 16px; color: #94a3b8; }
+    
+    .trip-assets { display: flex; gap: 12px; }
+    .asset-pill { font-size: 0.75rem; color: #cbd5e1; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 6px; display: flex; align-items: center; gap: 4px; }
+    .asset-pill mat-icon { font-size: 14px; width: 14px; height: 14px; color: #94a3b8; }
+    
+    .trip-badge { font-size: 0.65rem; font-weight: 800; color: #4ade80; padding: 4px 8px; border: 1px solid rgba(74, 222, 128, 0.2); border-radius: 6px; letter-spacing: 0.05em; }
+
+    .monitor-empty { padding: 64px 24px; text-align: center; color: #64748b; }
+    .monitor-empty mat-icon { font-size: 48px; width: 48px; height: 48px; color: #1e293b; margin-bottom: 16px; }
+    .monitor-empty p { margin: 0 0 4px; font-weight: 600; color: #94a3b8; }
+    .monitor-empty span { font-size: 0.8rem; opacity: 0.6; }
+
+    @media (max-width: 1200px) {
+      .dispatch-layout { grid-template-columns: 1fr; }
+    }
   `]
 })
 export class TripDispatchComponent implements OnInit {
@@ -165,12 +221,13 @@ export class TripDispatchComponent implements OnInit {
     cargoWeight: [0, [Validators.required, Validators.min(1)]],
     startLocation: ['', Validators.required],
     endLocation: ['', Validators.required],
-    revenue: [0, Validators.required]
+    revenue: [0, [Validators.required, Validators.min(0)]]
   });
 
   availableVehicles: any[] = [];
   availableDrivers: any[] = [];
   activeTrips: any[] = [];
+  isSubmitting = false;
 
   ngOnInit() {
     this.refreshData();
@@ -183,13 +240,23 @@ export class TripDispatchComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.dispatchForm.valid) {
+    if (this.dispatchForm.valid && !this.isSubmitting) {
+      this.isSubmitting = true;
       this.http.post('http://localhost:5104/api/trips/dispatch', this.dispatchForm.value).subscribe({
         next: () => {
-          this.dispatchForm.reset();
+          this.dispatchForm.reset({
+            cargoWeight: 0,
+            revenue: 0,
+            startLocation: '',
+            endLocation: ''
+          });
           this.refreshData();
+          this.isSubmitting = false;
         },
-        error: (err) => console.error(err)
+        error: (err) => {
+          console.error(err);
+          this.isSubmitting = false;
+        }
       });
     }
   }

@@ -8,7 +8,8 @@
     --bg-surface: #1e293b;
     --bg-card: rgba(30, 41, 59, 0.7);
     --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
     --border-color: rgba(255, 255, 255, 0.1);
     --glass-effect: blur(12px) saturate(180%);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -61,7 +62,7 @@ h3 {
 }
 
 .mat-mdc-header-cell {
-    color: var(--text-secondary) !important;
+    color: var(--text-muted) !important;
     text-transform: uppercase;
     font-size: 0.75rem;
     font-weight: 600;
@@ -163,9 +164,68 @@ h3 {
 
 .mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper {
     border: 1px solid var(--primary) !important;
-    background: rgba(99, 102, 241, 0.05) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.mat-mdc-form-field-label,
+.mdc-floating-label {
+    color: #cbd5e1 !important;
+    opacity: 1 !important;
+}
+
+.mat-mdc-form-field.mat-focused .mdc-floating-label {
+    color: var(--primary) !important;
+}
+
+.mat-mdc-form-field mat-icon {
+    color: #cbd5e1 !important;
+}
+
+.mat-mdc-input-element,
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: #f8fafc !important;
+}
+
+/* Material Select & Dropdown Overrides */
+.mat-mdc-select-value {
+    color: #f8fafc !important;
+}
+
+.mat-mdc-select-arrow svg {
+    fill: #cbd5e1 !important;
+}
+
+.cdk-overlay-pane .mat-mdc-select-panel {
+    background-color: #1e293b !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mat-mdc-option {
+    color: #cbd5e1 !important;
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+    color: #cbd5e1 !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    color: var(--primary) !important;
+}
+
+.mat-mdc-option:hover:not(.mdc-list-item--disabled),
+.mat-mdc-option.mdc-list-item--active:not(.mdc-list-item--disabled) {
+    background: rgba(255, 255, 255, 0.05) !important;
 }
 
 .mat-mdc-form-field-label {
-    color: var(--text-secondary) !important;
+    color: #f8fafc !important;
+    opacity: 1 !important;
+}
+
+.mat-mdc-form-field mat-icon {
+    color: #f8fafc !important;
+}
+
+.mat-mdc-input-element {
+    color: #f8fafc !important;
 }

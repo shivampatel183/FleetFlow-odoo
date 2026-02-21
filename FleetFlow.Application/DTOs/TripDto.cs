@@ -21,5 +21,6 @@ namespace FleetFlow.Application.DTOs
         public decimal CargoWeight { get; set; }
         public string StartLocation { get; set; } = string.Empty;
         public string EndLocation { get; set; } = string.Empty;
+        public decimal Revenue { get; set; }
     }
 }
