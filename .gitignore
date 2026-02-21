@@ -1,36 +1,35 @@
-# Visual Studio
+## --- IDE & OS Files ---
 .vs/
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*.bak
+*.tmp
+.DS_Store
+
+## --- .NET Specific ---
+**/[Bb]in/
+**/[Oo]bj/
 [Dd]ebug/
 [Rr]elease/
 x64/
 x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
-bld/
-[Bb][Ii][Nn]/
-[Oo][Bb][Jj]/
-*.user
-*.userosscache
-*.sln.docstates
 
-# .NET
-bin/
-obj/
-appsettings.json
+# Exclude local environment secrets but KEEP the main config
 appsettings.Development.json
 .env
 
-# Angular/Node
-node_modules/
-dist/
-package-lock.json
-yarn.lock
+## --- Angular / Node.js ---
+**/node_modules/
+**/dist/
 .angular/
 .npm/
+# package-lock.json is removed from here because it SHOULD be tracked
 
-# Others
-.idea/
-.vscode/
-*.swp
-*.bak
-*.tmp
+## --- Others ---
+.DS_Store
