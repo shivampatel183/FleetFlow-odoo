@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AddVehicleDialogComponent } from '../add-vehicle-dialog/add-vehicle-dialog.component';
+import { VehiclesService } from '../../../services/vehicles.service';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -97,41 +97,48 @@ import { AddVehicleDialogComponent } from '../add-vehicle-dialog/add-vehicle-dia
       justify-content: space-between; 
       align-items: flex-end; 
       margin-bottom: 32px; 
+      gap: 16px;
     }
-    .header-info h1 { margin: 0 0 4px; font-size: 1.75rem; }
-    .header-info p { margin: 0; color: #64748b; font-size: 0.95rem; }
+    .header-info h1 { margin: 0 0 4px; font-size: 1.75rem; color: var(--text-primary); }
+    .header-info p { margin: 0; color: var(--text-secondary); font-size: 0.95rem; }
 
-    .table-card { padding: 8px; overflow: hidden; }
-    .premium-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+    .table-card { padding: 8px; overflow-x: auto; }
+    .premium-table { width: 100%; min-width: 600px; border-collapse: separate; border-spacing: 0; }
     
     .premium-row { height: 72px; cursor: pointer; transition: background 0.2s; }
     .premium-row:hover { background: rgba(255, 255, 255, 0.03) !important; }
 
-    .plate-cell { display: flex; align-items: center; gap: 8px; color: #6366f1; font-weight: 700; font-family: 'Inter', monospace; }
-    .plate-cell mat-icon { font-size: 20px; width: 20px; height: 20px; color: #475569; }
+    .plate-cell { display: flex; align-items: center; gap: 8px; color: var(--primary); font-weight: 700; font-family: 'Inter', monospace; }
+    .plate-cell mat-icon { font-size: 20px; width: 20px; height: 20px; color: var(--text-muted); }
 
     .model-cell { display: flex; flex-direction: column; gap: 2px; }
-    .model-name { font-weight: 600; color: #f8fafc; }
-    .model-specs { font-size: 0.75rem; color: #64748b; }
+    .model-name { font-weight: 600; color: var(--text-primary); }
+    .model-specs { font-size: 0.75rem; color: var(--text-muted); }
 
     .pulse-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-    .status-available .pulse-dot { box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2); }
+    .status-available .pulse-dot { box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2); }
     .status-ontrip .pulse-dot { box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
 
     .action-buttons { display: flex; gap: 4px; }
-    .edit-btn { color: #6366f1; }
+    .edit-btn { color: var(--primary); }
     .edit-btn:hover { background: rgba(99, 102, 241, 0.1); }
-    .delete-btn { color: #f43f5e; }
+    .delete-btn { color: var(--secondary); }
     .delete-btn:hover { background: rgba(244, 63, 94, 0.1); }
 
-    .empty-state { padding: 64px; text-align: center; color: #64748b; }
+    .empty-state { padding: 64px; text-align: center; color: var(--text-muted); }
     .empty-state mat-icon { font-size: 48px; width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.2; }
+
+    @media (max-width: 768px) {
+      .list-header { flex-direction: column; align-items: flex-start; }
+      .header-info h1 { font-size: 1.5rem; }
+      .btn-primary { width: 100%; }
+    }
   `]
 })
 export class VehicleListComponent implements OnInit {
   displayedColumns: string[] = ['licensePlate', 'model', 'status', 'actions'];
   vehicles: any[] = [];
-  private http = inject(HttpClient);
+  private vehiclesService = inject(VehiclesService);
   private dialog = inject(MatDialog);
 
   ngOnInit() {
@@ -139,7 +146,7 @@ export class VehicleListComponent implements OnInit {
   }
 
   loadVehicles() {
-    this.http.get<any[]>('http://localhost:5104/api/vehicles').subscribe(data => {
+    this.vehiclesService.getAll().subscribe(data => {
       this.vehicles = data;
     });
   }
@@ -177,7 +184,7 @@ export class VehicleListComponent implements OnInit {
       return;
     }
     if (confirm('Are you sure you want to retire this vehicle from the registry? Note: This will also delete all associated trips and logs.')) {
-      this.http.delete(`http://localhost:5104/api/vehicles/${id}`).subscribe({
+      this.vehiclesService.delete(id).subscribe({
         next: () => {
           this.loadVehicles();
         },

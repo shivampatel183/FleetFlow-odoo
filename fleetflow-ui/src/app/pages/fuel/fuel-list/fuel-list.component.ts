@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddFuelDialogComponent } from '../add-fuel-dialog/add-fuel-dialog.component';
+import { FuelService } from '../../../services/fuel.service';
 
 @Component({
   selector: 'app-fuel-list',
@@ -82,7 +82,7 @@ import { AddFuelDialogComponent } from '../add-fuel-dialog/add-fuel-dialog.compo
 export class FuelListComponent implements OnInit {
   displayedColumns: string[] = ['date', 'vehicle', 'liters', 'cost'];
   logs: any[] = [];
-  private http = inject(HttpClient);
+  private fuelService = inject(FuelService);
   private dialog = inject(MatDialog);
 
   ngOnInit() {
@@ -90,7 +90,7 @@ export class FuelListComponent implements OnInit {
   }
 
   loadLogs() {
-    this.http.get<any[]>('http://localhost:5104/api/fuel').subscribe(data => {
+    this.fuelService.getAll().subscribe(data => {
       this.logs = data;
     });
   }

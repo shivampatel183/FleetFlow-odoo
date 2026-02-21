@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddMaintenanceDialogComponent } from '../add-maintenance-dialog/add-maintenance-dialog.component';
+import { MaintenanceService } from '../../../services/maintenance.service';
 
 @Component({
   selector: 'app-maintenance-list',
@@ -82,7 +82,7 @@ import { AddMaintenanceDialogComponent } from '../add-maintenance-dialog/add-mai
 export class MaintenanceListComponent implements OnInit {
   displayedColumns: string[] = ['vehicle', 'description', 'date', 'cost'];
   logs: any[] = [];
-  private http = inject(HttpClient);
+  private maintenanceService = inject(MaintenanceService);
   private dialog = inject(MatDialog);
 
   ngOnInit() {
@@ -90,7 +90,7 @@ export class MaintenanceListComponent implements OnInit {
   }
 
   loadLogs() {
-    this.http.get<any[]>('http://localhost:5104/api/maintenance').subscribe(data => {
+    this.maintenanceService.getAll().subscribe(data => {
       this.logs = data;
     });
   }

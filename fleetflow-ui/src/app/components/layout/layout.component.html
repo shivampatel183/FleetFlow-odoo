@@ -1,0 +1,71 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #sidenav
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="!isMobile"
+    class="sidenav"
+  >
+    <div class="brand">FleetFlow</div>
+
+    <mat-nav-list class="nav-list">
+      <a
+        mat-list-item
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        (click)="closeIfMobile(sidenav)"
+        >Dashboard</a
+      >
+      <a
+        mat-list-item
+        routerLink="/vehicles"
+        routerLinkActive="active"
+        (click)="closeIfMobile(sidenav)"
+        >Vehicles</a
+      >
+      <a
+        mat-list-item
+        routerLink="/drivers"
+        routerLinkActive="active"
+        (click)="closeIfMobile(sidenav)"
+        >Drivers</a
+      >
+      <a
+        mat-list-item
+        routerLink="/dispatch"
+        routerLinkActive="active"
+        (click)="closeIfMobile(sidenav)"
+        >Dispatch</a
+      >
+      <a
+        mat-list-item
+        routerLink="/maintenance"
+        routerLinkActive="active"
+        (click)="closeIfMobile(sidenav)"
+        >Maintenance</a
+      >
+      <a
+        mat-list-item
+        routerLink="/fuel"
+        routerLinkActive="active"
+        (click)="closeIfMobile(sidenav)"
+        >Fuel</a
+      >
+    </mat-nav-list>
+
+    <div class="logout-section">
+      <button mat-button class="logout-btn" (click)="onLogout()">Logout</button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content">
+    <header class="main-header">
+      <button *ngIf="isMobile" mat-icon-button (click)="sidenav.open()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h1>{{ title }}</h1>
+    </header>
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

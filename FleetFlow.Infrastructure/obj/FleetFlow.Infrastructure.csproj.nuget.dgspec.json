@@ -81,10 +81,6 @@
               "version": "[8.0.24, 8.0.24]"
             },
             {
-              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-              "version": "[9.0.311, 9.0.311]"
-            },
-            {
               "name": "Microsoft.NETCore.App.Ref",
               "version": "[8.0.24, 8.0.24]"
             },
@@ -165,10 +161,6 @@
               "version": "[8.0.24, 8.0.24]"
             },
             {
-              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-              "version": "[9.0.311, 9.0.311]"
-            },
-            {
               "name": "Microsoft.NETCore.App.Ref",
               "version": "[8.0.24, 8.0.24]"
             },
@@ -243,15 +235,15 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
-              "version": "[8.0.0, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
@@ -277,10 +269,6 @@
             {
               "name": "Microsoft.AspNetCore.App.Ref",
               "version": "[8.0.24, 8.0.24]"
-            },
-            {
-              "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-              "version": "[9.0.311, 9.0.311]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",

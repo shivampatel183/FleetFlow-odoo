@@ -5,8 +5,8 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { DriversService } from '../../../services/drivers.service';
 
 @Component({
   selector: 'app-add-driver-dialog',
@@ -58,12 +58,12 @@ import { MatIconModule } from '@angular/material/icon';
   `,
   styles: [`
     .premium-form { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
-    .cancel-btn { color: #94a3b8; margin-right: 8px; }
+    .cancel-btn { color: var(--text-muted); margin-right: 8px; }
   `]
 })
 export class AddDriverDialogComponent {
   private fb = inject(FormBuilder);
-  private http = inject(HttpClient);
+  private driversService = inject(DriversService);
   private dialogRef = inject(MatDialogRef<AddDriverDialogComponent>);
   public data = inject(MAT_DIALOG_DATA, { optional: true });
 
@@ -95,12 +95,12 @@ export class AddDriverDialogComponent {
     if (this.driverForm.valid) {
       const driverId = this.data?.id || this.data?.Id;
       if (this.data && driverId) {
-        this.http.put(`http://localhost:5104/api/drivers/${driverId}`, this.driverForm.value).subscribe({
+        this.driversService.update(driverId, this.driverForm.value).subscribe({
           next: () => this.dialogRef.close(true),
           error: (err) => console.error(err)
         });
       } else {
-        this.http.post('http://localhost:5104/api/drivers', this.driverForm.value).subscribe({
+        this.driversService.create(this.driverForm.value).subscribe({
           next: () => this.dialogRef.close(true),
           error: (err) => console.error(err)
         });

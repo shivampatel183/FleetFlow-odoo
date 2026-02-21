@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient } from '@angular/common/http';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -133,10 +133,10 @@ import { HttpClient } from '@angular/common/http';
     }
 
     .glass-card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(12px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-effect);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
     }
 
     .welcome-banner {
@@ -146,27 +146,28 @@ import { HttpClient } from '@angular/common/http';
       align-items: center;
       background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.08));
     }
-    .welcome-text h1 { margin: 0 0 6px; font-size: 1.8rem; color: #f8fafc; }
-    .welcome-text p { margin: 0; color: #cbd5e1; font-size: 1rem; }
+    .welcome-text h1 { margin: 0 0 6px; font-size: 1.8rem; color: var(--text-primary); }
+    .welcome-text p { margin: 0; color: var(--text-secondary); font-size: 1rem; }
 
     .banner-stats { display: flex; align-items: center; gap: 32px; }
     .stat-item { display: flex; flex-direction: column; align-items: flex-end; }
-    .stat-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
-    .stat-value { font-size: 1.4rem; font-weight: 800; color: #6366f1; }
-    .stat-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.1); }
+    .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+    .stat-value { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+    .stat-divider { width: 1px; height: 32px; background: var(--border-color); }
 
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 24px;
     }
-    .kpi-card { padding: 24px; position: relative; overflow: hidden; }
+    .kpi-card { padding: 24px; position: relative; overflow: hidden; transition: transform 0.2s ease; }
+    .kpi-card:hover { transform: translateY(-4px); }
     .kpi-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     .kpi-icon-container { padding: 12px; border-radius: 14px; display: flex; }
-    .kpi-tag { font-size: 0.65rem; font-weight: 700; color: #94a3b8; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
+    .kpi-tag { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); background: var(--border-color); padding: 4px 10px; border-radius: var(--radius-full); text-transform: uppercase; }
     
-    .kpi-title { font-size: 0.9rem; color: #cbd5e1; font-weight: 500; margin-bottom: 6px; }
-    .kpi-value { font-size: 2rem; font-weight: 800; color: #f8fafc; letter-spacing: -0.02em; }
+    .kpi-title { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; margin-bottom: 6px; }
+    .kpi-value { font-size: 2rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.02em; }
 
     .secondary-grid {
       display: grid;
@@ -176,7 +177,7 @@ import { HttpClient } from '@angular/common/http';
     
     .content-card { padding: 28px; }
     .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
-    .card-header h3 { margin: 0; font-size: 1.25rem; font-weight: 700; color: #f8fafc; }
+    .card-header h3 { margin: 0; font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
 
     .activity-list { display: flex; flex-direction: column; gap: 18px; }
     .activity-item { 
@@ -184,32 +185,41 @@ import { HttpClient } from '@angular/common/http';
       align-items: center; 
       gap: 16px; 
       padding-bottom: 18px; 
-      border-bottom: 1px solid rgba(255,255,255,0.05); 
+      border-bottom: 1px solid var(--border-color); 
     }
-    .activity-icon { font-size: 1.5rem; filter: grayscale(0.2); }
+    .activity-icon { font-size: 1.5rem; }
     .activity-details { flex: 1; }
-    .activity-title { font-size: 0.95rem; font-weight: 600; color: #f1f5f9; margin-bottom: 2px; }
-    .activity-time { font-size: 0.75rem; color: #94a3b8; }
+    .activity-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+    .activity-time { font-size: 0.75rem; color: var(--text-muted); }
     .activity-status { font-size: 0.65rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
     
     .health-stats { display: flex; flex-direction: column; gap: 24px; }
     .health-item { display: flex; flex-direction: column; gap: 10px; }
     .health-info { display: flex; justify-content: space-between; align-items: center; }
-    .health-label { font-size: 0.9rem; color: #cbd5e1; font-weight: 500; }
-    .health-count { font-size: 0.8rem; color: #94a3b8; }
-    .health-bar-bg { height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; padding: 1px; }
+    .health-label { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; }
+    .health-count { font-size: 0.8rem; color: var(--text-muted); }
+    .health-bar-bg { height: 8px; background: var(--border-color); border-radius: 4px; overflow: hidden; }
     .health-bar { height: 100%; border-radius: 3px; }
 
-    .empty-state { padding: 48px; text-align: center; color: #64748b; }
-    .empty-state mat-icon { font-size: 48px; width: 48px; height: 48px; opacity: 0.1; margin-bottom: 16px; }
+    .empty-state { padding: 48px; text-align: center; color: var(--text-muted); }
+    .empty-state mat-icon { font-size: 48px; width: 48px; height: 48px; opacity: 0.2; margin-bottom: 16px; }
 
     @media (max-width: 1024px) {
       .secondary-grid { grid-template-columns: 1fr; }
+      .welcome-banner { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .banner-stats { width: 100%; justify-content: space-between; }
     }
+
+    @media (max-width: 640px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+      .welcome-banner { padding: 24px; }
+      .stat-value { font-size: 1.2rem; }
+    }
+
   `]
 })
 export class DashboardComponent implements OnInit {
-  private http = inject(HttpClient);
+  private analyticsService = inject(AnalyticsService);
   metrics: any;
 
   ngOnInit() {
@@ -217,7 +227,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchMetrics() {
-    this.http.get('http://localhost:5104/api/analytics/kpis').subscribe(data => {
+    this.analyticsService.getKpis().subscribe(data => {
       this.metrics = data;
     });
   }

@@ -5,8 +5,8 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { VehiclesService } from '../../../services/vehicles.service';
 
 @Component({
   selector: 'app-add-vehicle-dialog',
@@ -73,12 +73,16 @@ import { MatIconModule } from '@angular/material/icon';
   styles: [`
     .premium-form { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
     .form-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .cancel-btn { color: #94a3b8; margin-right: 8px; }
+    .cancel-btn { color: var(--text-muted); margin-right: 8px; }
+    
+    @media (max-width: 480px) {
+      .form-row-grid { grid-template-columns: 1fr; }
+    }
   `]
 })
 export class AddVehicleDialogComponent {
   private fb = inject(FormBuilder);
-  private http = inject(HttpClient);
+  private vehiclesService = inject(VehiclesService);
   private dialogRef = inject(MatDialogRef<AddVehicleDialogComponent>);
   public data = inject(MAT_DIALOG_DATA, { optional: true });
 
@@ -111,12 +115,12 @@ export class AddVehicleDialogComponent {
     if (this.vehicleForm.valid) {
       const vehicleId = this.data?.id || this.data?.Id;
       if (this.data && vehicleId) {
-        this.http.put(`http://localhost:5104/api/vehicles/${vehicleId}`, this.vehicleForm.value).subscribe({
+        this.vehiclesService.update(vehicleId, this.vehicleForm.value).subscribe({
           next: () => this.dialogRef.close(true),
           error: (err) => console.error(err)
         });
       } else {
-        this.http.post('http://localhost:5104/api/vehicles', this.vehicleForm.value).subscribe({
+        this.vehiclesService.create(this.vehicleForm.value).subscribe({
           next: () => this.dialogRef.close(true),
           error: (err) => console.error(err)
         });

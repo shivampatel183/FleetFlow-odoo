@@ -6,8 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { HttpClient } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { FuelService } from '../../../services/fuel.service';
+import { VehiclesService } from '../../../services/vehicles.service';
 
 @Component({
     selector: 'app-add-fuel-dialog',
@@ -62,7 +63,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AddFuelDialogComponent implements OnInit {
     private fb = inject(FormBuilder);
-    private http = inject(HttpClient);
+    private fuelService = inject(FuelService);
+    private vehiclesService = inject(VehiclesService);
     public dialogRef = inject(MatDialogRef<AddFuelDialogComponent>);
     public data = inject(MAT_DIALOG_DATA, { optional: true });
 
@@ -75,13 +77,13 @@ export class AddFuelDialogComponent implements OnInit {
     });
 
     ngOnInit() {
-        this.http.get<any[]>('http://localhost:5104/api/vehicles').subscribe(data => this.vehicles = data);
+        this.vehiclesService.getAll().subscribe(data => this.vehicles = data);
         if (this.data) this.fuelForm.patchValue(this.data);
     }
 
     onSave() {
         if (this.fuelForm.valid) {
-            this.http.post('http://localhost:5104/api/fuel', this.fuelForm.value).subscribe({
+            this.fuelService.create(this.fuelForm.value).subscribe({
                 next: () => this.dialogRef.close(true),
                 error: (err) => console.error(err)
             });

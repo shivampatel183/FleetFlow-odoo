@@ -1,13 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { VehiclesService } from '../../../services/vehicles.service';
+import { DriversService } from '../../../services/drivers.service';
+import { TripsService } from '../../../services/trips.service';
 
 @Component({
   selector: 'app-trip-dispatch',
@@ -142,21 +144,21 @@ import { MatIconModule } from '@angular/material/icon';
   styles: [`
     .page-container { animation: fadeIn 0.4s ease-out; }
     .list-header { margin-bottom: 32px; }
-    .header-info h1 { margin: 0 0 4px; font-size: 2rem; color: #f8fafc; font-weight: 800; }
-    .header-info p { margin: 0; color: #94a3b8; font-size: 1rem; }
+    .header-info h1 { margin: 0 0 4px; font-size: 2rem; color: var(--text-primary); font-weight: 800; }
+    .header-info p { margin: 0; color: var(--text-muted); font-size: 1rem; }
 
     .dispatch-layout { display: grid; grid-template-columns: 1.5fr 1fr; gap: 28px; }
     
     .command-section, .monitor-section { padding: 32px; height: fit-content; }
     .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; }
-    .card-header h3 { margin: 0; font-size: 1.2rem; color: #f8fafc; display: flex; align-items: center; gap: 10px; }
-    .card-header mat-icon { color: #f8fafc; }
+    .card-header h3 { margin: 0; font-size: 1.2rem; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
+    .card-header mat-icon { color: var(--text-primary); }
     
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .full-width { grid-column: span 2; }
     
     .option-content { display: flex; flex-direction: column; }
-    .plate { font-weight: 700; color: #f8fafc; }
+    .plate { font-weight: 700; color: var(--text-primary); }
     .model { font-size: 0.75rem; color: #94a3b8; }
     
     .action-footer { margin-top: 32px; }
@@ -192,11 +194,11 @@ import { MatIconModule } from '@angular/material/icon';
     @keyframes pulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.4); opacity: 0; } }
 
     .trip-details { flex: 1; }
-    .trip-route { font-size: 1rem; font-weight: 700; color: #f8fafc; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .trip-route { font-size: 1rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
     .trip-route mat-icon { font-size: 16px; width: 16px; height: 16px; color: #94a3b8; }
     
     .trip-assets { display: flex; gap: 12px; }
-    .asset-pill { font-size: 0.75rem; color: #cbd5e1; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 6px; display: flex; align-items: center; gap: 4px; }
+    .asset-pill { font-size: 0.75rem; color: var(--text-secondary); background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 6px; display: flex; align-items: center; gap: 4px; }
     .asset-pill mat-icon { font-size: 14px; width: 14px; height: 14px; color: #94a3b8; }
     
     .trip-badge { font-size: 0.65rem; font-weight: 800; color: #4ade80; padding: 4px 8px; border: 1px solid rgba(74, 222, 128, 0.2); border-radius: 6px; letter-spacing: 0.05em; }
@@ -213,7 +215,9 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class TripDispatchComponent implements OnInit {
   private fb = inject(FormBuilder);
-  private http = inject(HttpClient);
+  private vehiclesService = inject(VehiclesService);
+  private driversService = inject(DriversService);
+  private tripsService = inject(TripsService);
 
   dispatchForm = this.fb.group({
     vehicleId: [null, Validators.required],
@@ -234,15 +238,15 @@ export class TripDispatchComponent implements OnInit {
   }
 
   refreshData() {
-    this.http.get<any[]>('http://localhost:5104/api/vehicles/available').subscribe(data => this.availableVehicles = data);
-    this.http.get<any[]>('http://localhost:5104/api/drivers/available').subscribe(data => this.availableDrivers = data);
-    this.http.get<any[]>('http://localhost:5104/api/trips/active').subscribe(data => this.activeTrips = data);
+    this.vehiclesService.getAvailable().subscribe(data => this.availableVehicles = data);
+    this.driversService.getAvailable().subscribe(data => this.availableDrivers = data);
+    this.tripsService.getActive().subscribe(data => this.activeTrips = data);
   }
 
   onSubmit() {
     if (this.dispatchForm.valid && !this.isSubmitting) {
       this.isSubmitting = true;
-      this.http.post('http://localhost:5104/api/trips/dispatch', this.dispatchForm.value).subscribe({
+      this.tripsService.dispatch(this.dispatchForm.value).subscribe({
         next: () => {
           this.dispatchForm.reset({
             cargoWeight: 0,

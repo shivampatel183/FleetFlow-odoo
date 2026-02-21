@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AddDriverDialogComponent } from '../add-driver-dialog/add-driver-dialog.component';
+import { DriversService } from '../../../services/drivers.service';
 
 @Component({
   selector: 'app-driver-list',
@@ -110,12 +110,13 @@ import { AddDriverDialogComponent } from '../add-driver-dialog/add-driver-dialog
       justify-content: space-between; 
       align-items: flex-end; 
       margin-bottom: 32px; 
+      gap: 16px;
     }
-    .header-info h1 { margin: 0 0 4px; font-size: 1.75rem; }
-    .header-info p { margin: 0; color: #64748b; font-size: 0.95rem; }
+    .header-info h1 { margin: 0 0 4px; font-size: 1.75rem; color: var(--text-primary); }
+    .header-info p { margin: 0; color: var(--text-secondary); font-size: 0.95rem; }
 
-    .table-card { padding: 8px; overflow: hidden; }
-    .premium-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+    .table-card { padding: 8px; overflow-x: auto; }
+    .premium-table { width: 100%; min-width: 600px; border-collapse: separate; border-spacing: 0; }
     
     .premium-row { height: 72px; cursor: pointer; transition: background 0.2s; }
     .premium-row:hover { background: rgba(255, 255, 255, 0.03) !important; }
@@ -126,7 +127,7 @@ import { AddDriverDialogComponent } from '../add-driver-dialog/add-driver-dialog
       height: 40px; 
       border-radius: 10px; 
       background: rgba(99, 102, 241, 0.1); 
-      color: #6366f1; 
+      color: var(--primary); 
       display: flex; 
       align-items: center; 
       justify-content: center; 
@@ -134,30 +135,36 @@ import { AddDriverDialogComponent } from '../add-driver-dialog/add-driver-dialog
       font-size: 0.85rem;
       border: 1px solid rgba(99, 102, 241, 0.2);
     }
-    .driver-name { font-weight: 600; color: #f8fafc; }
-    .driver-id { font-size: 0.75rem; color: #64748b; }
+    .driver-name { font-weight: 600; color: var(--text-primary); }
+    .driver-id { font-size: 0.75rem; color: var(--text-muted); }
 
-    .license-cell { display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 0.9rem; }
-    .license-cell mat-icon { font-size: 18px; width: 18px; height: 18px; color: #10b981; }
+    .license-cell { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem; }
+    .license-cell mat-icon { font-size: 18px; width: 18px; height: 18px; color: var(--accent); }
 
-    .expiry-cell { display: flex; align-items: center; gap: 8px; color: #94a3b8; font-size: 0.9rem; }
+    .expiry-cell { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem; }
     .expiry-cell mat-icon { font-size: 18px; width: 18px; height: 18px; }
-    .expiry-cell.warning { color: #f43f5e; }
+    .expiry-cell.warning { color: var(--secondary); }
 
     .action-buttons { display: flex; gap: 4px; }
-    .edit-btn { color: #6366f1; }
+    .edit-btn { color: var(--primary); }
     .edit-btn:hover { background: rgba(99, 102, 241, 0.1); }
-    .delete-btn { color: #f43f5e; }
+    .delete-btn { color: var(--secondary); }
     .delete-btn:hover { background: rgba(244, 63, 94, 0.1); }
 
-    .empty-state { padding: 64px; text-align: center; color: #64748b; }
+    .empty-state { padding: 64px; text-align: center; color: var(--text-muted); }
     .empty-state mat-icon { font-size: 48px; width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.2; }
+
+    @media (max-width: 768px) {
+      .list-header { flex-direction: column; align-items: flex-start; }
+      .header-info h1 { font-size: 1.5rem; }
+      .btn-primary { width: 100%; }
+    }
   `]
 })
 export class DriverListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'licenseNumber', 'expiry', 'status', 'actions'];
   drivers: any[] = [];
-  private http = inject(HttpClient);
+  private driversService = inject(DriversService);
   private dialog = inject(MatDialog);
 
   ngOnInit() {
@@ -165,7 +172,7 @@ export class DriverListComponent implements OnInit {
   }
 
   loadDrivers() {
-    this.http.get<any[]>('http://localhost:5104/api/drivers').subscribe(data => {
+    this.driversService.getAll().subscribe(data => {
       this.drivers = data;
     });
   }
@@ -210,7 +217,7 @@ export class DriverListComponent implements OnInit {
       return;
     }
     if (confirm('Are you sure you want to revoke access for this personnel? Note: This will also delete all associated trips.')) {
-      this.http.delete(`http://localhost:5104/api/drivers/${id}`).subscribe({
+      this.driversService.delete(id).subscribe({
         next: () => {
           this.loadDrivers();
         },

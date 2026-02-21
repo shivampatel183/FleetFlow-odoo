@@ -6,8 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { HttpClient } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
+import { MaintenanceService } from '../../../services/maintenance.service';
+import { VehiclesService } from '../../../services/vehicles.service';
 
 @Component({
     selector: 'app-add-maintenance-dialog',
@@ -62,7 +63,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AddMaintenanceDialogComponent implements OnInit {
     private fb = inject(FormBuilder);
-    private http = inject(HttpClient);
+    private maintenanceService = inject(MaintenanceService);
+    private vehiclesService = inject(VehiclesService);
     public dialogRef = inject(MatDialogRef<AddMaintenanceDialogComponent>);
     public data = inject(MAT_DIALOG_DATA, { optional: true });
 
@@ -75,13 +77,13 @@ export class AddMaintenanceDialogComponent implements OnInit {
     });
 
     ngOnInit() {
-        this.http.get<any[]>('http://localhost:5104/api/vehicles').subscribe(data => this.vehicles = data);
+        this.vehiclesService.getAll().subscribe(data => this.vehicles = data);
         if (this.data) this.maintForm.patchValue(this.data);
     }
 
     onSave() {
         if (this.maintForm.valid) {
-            this.http.post('http://localhost:5104/api/maintenance', this.maintForm.value).subscribe({
+            this.maintenanceService.create(this.maintForm.value).subscribe({
                 next: () => this.dialogRef.close(true),
                 error: (err) => console.error(err)
             });
