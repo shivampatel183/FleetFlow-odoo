@@ -10,3 +10,15 @@ C:\Users\MIS\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\FleetFlow.
 C:\Users\MIS\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\refint\FleetFlow.Domain.dll
 C:\Users\MIS\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\FleetFlow.Domain.pdb
 C:\Users\MIS\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\ref\FleetFlow.Domain.dll
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\bin\Debug\net8.0\FleetFlow.Domain.deps.json
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\bin\Debug\net8.0\FleetFlow.Domain.dll
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\bin\Debug\net8.0\FleetFlow.Domain.pdb
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\FleetFlow.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\FleetFlow.Domain.AssemblyInfoInputs.cache
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\FleetFlow.Domain.AssemblyInfo.cs
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\FleetFlow.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\FleetFlow.Domain.sourcelink.json
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\FleetFlow.Domain.dll
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\refint\FleetFlow.Domain.dll
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\FleetFlow.Domain.pdb
+C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.Domain\obj\Debug\net8.0\ref\FleetFlow.Domain.dll
