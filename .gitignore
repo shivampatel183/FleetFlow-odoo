@@ -1,13 +1,36 @@
-# Angular specific
-/dist/
-/node_modules/
-/package-lock.json
-/yarn.lock
-/.env
-/.vs
+# Visual Studio
+.vs/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb][Ii][Nn]/
+[Oo][Bb][Jj]/
+*.user
+*.userosscache
+*.sln.docstates
 
-# .Net specific
-/bin
-/obj
-/appsettings.json
-/appsettings.Development.json
+# .NET
+bin/
+obj/
+appsettings.json
+appsettings.Development.json
+.env
+
+# Angular/Node
+node_modules/
+dist/
+package-lock.json
+yarn.lock
+.angular/
+.npm/
+
+# Others
+.idea/
+.vscode/
+*.swp
+*.bak
+*.tmp
