@@ -128,12 +128,100 @@ h6 {
   border-bottom-color: var(--border-color) !important;
 }
 
+<<<<<<< HEAD
 /* Form Styles */
+=======
+/* Custom Utilities */
+.status-pill {
+    font-weight: 600;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.status-available {
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-ontrip {
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.status-inshop {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.btn-primary {
+    background: var(--primary) !important;
+    color: white !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+/* Premium Dialog Styling */
+.cdk-overlay-pane {
+    backdrop-filter: blur(8px);
+}
+
+.premium-dialog .mat-mdc-dialog-container {
+    background: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+    border-radius: 20px !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.premium-dialog .mat-mdc-dialog-surface {
+    background: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+}
+
+.premium-dialog .mat-mdc-dialog-title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    padding: 24px 24px 16px !important;
+    margin: 0 !important;
+}
+
+.premium-dialog .mat-mdc-dialog-content {
+    padding: 12px 24px 24px !important;
+    color: var(--text-secondary) !important;
+}
+
+.premium-dialog .mat-mdc-dialog-actions {
+    padding: 16px 24px 24px !important;
+    border-top: 1px solid var(--border-color) !important;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Premium Form Fields */
+>>>>>>> 2b0ca3006f03b67a707c6508bd02df5a5c3092c7
 .mat-mdc-form-field {
   width: 100%;
 }
 
 .mat-mdc-text-field-wrapper {
+<<<<<<< HEAD
   background: rgba(255, 255, 255, 0.03) !important;
   border-radius: 8px !important;
 }
@@ -159,6 +247,22 @@ textarea::placeholder,
 .mdc-text-field__input::placeholder {
   color: var(--text-secondary) !important;
   opacity: 1;
+=======
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper {
+    border: 1px solid var(--primary) !important;
+    background: rgba(99, 102, 241, 0.05) !important;
+}
+
+.mat-mdc-form-field-label,
+.mdc-floating-label,
+.mdc-floating-label--float-above {
+    color: var(--text-secondary) !important;
+>>>>>>> 2b0ca3006f03b67a707c6508bd02df5a5c3092c7
 }
 
 .cdk-overlay-container .mat-mdc-dialog-surface {

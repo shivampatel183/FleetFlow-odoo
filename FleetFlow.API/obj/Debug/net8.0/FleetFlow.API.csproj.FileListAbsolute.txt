@@ -155,5 +155,9 @@ C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.API\obj\Debug\net8.0\refint\Fle
 C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.API\obj\Debug\net8.0\FleetFlow.API.pdb
 C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.API\obj\Debug\net8.0\FleetFlow.API.genruntimeconfig.cache
 C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.API\obj\Debug\net8.0\ref\FleetFlow.API.dll
+<<<<<<< HEAD
 C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.API\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\Shivam\Desktop\FleetFlow-odoo\FleetFlow.API\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+=======
+C:\Users\MIS\Desktop\FleetFlow-odoo\FleetFlow.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+>>>>>>> 2b0ca3006f03b67a707c6508bd02df5a5c3092c7

@@ -23,9 +23,15 @@ import { AuthService } from '../../services/auth.service';
     <div class="login-page">
       <div class="login-card glass-card">
         <div class="login-header">
+<<<<<<< HEAD
           <div class="brand">FleetFlow</div>
           <h1>Sign in</h1>
           <p>Use your account to continue</p>
+=======
+          <div class="brand">Fleet<span>Flow</span></div>
+          <h1>Welcome Back</h1>
+          <p>Login to manage your fleet operations</p>
+>>>>>>> 2b0ca3006f03b67a707c6508bd02df5a5c3092c7
         </div>
 
         <form

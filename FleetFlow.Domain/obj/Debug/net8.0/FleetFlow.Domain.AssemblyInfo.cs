@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FleetFlow.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ce3d12f2c4ef7e65f70f7c35648083849a547646")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2aa9d3459f5f611b96fcc3a5044461a65f4c8e47")]
 [assembly: System.Reflection.AssemblyProductAttribute("FleetFlow.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FleetFlow.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
