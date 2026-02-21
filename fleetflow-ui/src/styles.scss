@@ -1,1 +1,171 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary: #f43f5e;
+    --bg-main: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-card: rgba(30, 41, 59, 0.7);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --glass-effect: blur(12px) saturate(180%);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius: 12px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+}
+
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: var(--glass-effect);
+    -webkit-backdrop-filter: var(--glass-effect);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Material Component Overrides */
+.mat-mdc-card {
+    background: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.mat-mdc-table {
+    background: transparent !important;
+}
+
+.mat-mdc-header-row {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.mat-mdc-row:hover {
+    background: rgba(255, 255, 255, 0.02) !important;
+}
+
+.mat-mdc-header-cell {
+    color: var(--text-secondary) !important;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.mat-mdc-cell {
+    color: var(--text-primary) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+/* Custom Utilities */
+.status-pill {
+    font-weight: 600;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.status-available {
+    background: rgba(34, 197, 94, 0.1);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-ontrip {
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.status-inshop {
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.btn-primary {
+    background: var(--primary) !important;
+    color: white !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+/* Premium Dialog Styling */
+.cdk-overlay-pane {
+    backdrop-filter: blur(8px);
+}
+
+.premium-dialog .mat-mdc-dialog-container {
+    background: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+    border-radius: 24px !important;
+    border: 1px solid var(--border-color) !important;
+    padding: 12px !important;
+}
+
+.premium-dialog .mat-mdc-dialog-title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: #f8fafc !important;
+    padding: 24px 24px 12px !important;
+}
+
+.premium-dialog .mat-mdc-dialog-content {
+    padding: 24px !important;
+}
+
+.premium-dialog .mat-mdc-dialog-actions {
+    padding: 16px 24px 24px !important;
+    border: none !important;
+}
+
+/* Premium Form Fields */
+.mat-mdc-form-field {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.mat-mdc-text-field-wrapper {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 12px !important;
+}
+
+.mat-mdc-form-field-focus-indicator {
+    display: none;
+}
+
+.mat-mdc-form-field.mat-focused .mat-mdc-text-field-wrapper {
+    border: 1px solid var(--primary) !important;
+    background: rgba(99, 102, 241, 0.05) !important;
+}
+
+.mat-mdc-form-field-label {
+    color: var(--text-secondary) !important;
+}

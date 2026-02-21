@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "FM7CR/5cFQ4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\MIS\\Desktop\\FleetFlow-odoo\\HashGen\\HashGen.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MIS\\.nuget\\packages\\bcrypt.net-next\\4.1.0\\bcrypt.net-next.4.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}
