@@ -2596,23 +2596,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Shivam\\.nuget\\packages\\": {},
+    "C:\\Users\\MIS\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Shivam\\Desktop\\FleetFlow-odoo\\FleetFlow.Infrastructure\\FleetFlow.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\MIS\\Desktop\\FleetFlow-odoo\\FleetFlow.Infrastructure\\FleetFlow.Infrastructure.csproj",
       "projectName": "FleetFlow.Infrastructure",
-      "projectPath": "C:\\Users\\Shivam\\Desktop\\FleetFlow-odoo\\FleetFlow.Infrastructure\\FleetFlow.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\Shivam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Shivam\\Desktop\\FleetFlow-odoo\\FleetFlow.Infrastructure\\obj\\",
+      "projectPath": "C:\\Users\\MIS\\Desktop\\FleetFlow-odoo\\FleetFlow.Infrastructure\\FleetFlow.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\MIS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\MIS\\Desktop\\FleetFlow-odoo\\FleetFlow.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Shivam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\MIS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2628,8 +2628,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Shivam\\Desktop\\FleetFlow-odoo\\FleetFlow.Application\\FleetFlow.Application.csproj": {
-              "projectPath": "C:\\Users\\Shivam\\Desktop\\FleetFlow-odoo\\FleetFlow.Application\\FleetFlow.Application.csproj"
+            "C:\\Users\\MIS\\Desktop\\FleetFlow-odoo\\FleetFlow.Application\\FleetFlow.Application.csproj": {
+              "projectPath": "C:\\Users\\MIS\\Desktop\\FleetFlow-odoo\\FleetFlow.Application\\FleetFlow.Application.csproj"
             }
           }
         }
@@ -2686,30 +2686,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.24, 8.0.24]"
-          },
-          {
-            "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-            "version": "[9.0.311, 9.0.311]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.24, 8.0.24]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.24, 8.0.24]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

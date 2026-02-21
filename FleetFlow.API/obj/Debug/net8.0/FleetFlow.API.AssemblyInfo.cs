@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FleetFlow.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3850fb5f21130b01878363dbe8727b9d42efa6ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9cbe3d081dcb6871fd8fd8eb7880ab6c8d32487")]
 [assembly: System.Reflection.AssemblyProductAttribute("FleetFlow.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FleetFlow.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
