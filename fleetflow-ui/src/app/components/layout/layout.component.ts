@@ -81,8 +81,6 @@ import { AuthService } from '../../services/auth.service';
         <header class="main-header glass-card">
           <div class="page-title">{{ title }}</div>
           <div class="header-actions">
-            <button mat-icon-button><mat-icon>notifications</mat-icon></button>
-            <button mat-icon-button><mat-icon>settings</mat-icon></button>
           </div>
         </header>
         
