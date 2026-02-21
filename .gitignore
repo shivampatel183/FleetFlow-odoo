@@ -1,13 +1,35 @@
-# Angular specific
-/dist/
-/node_modules/
-/package-lock.json
-/yarn.lock
-/.env
-/.vs
+## --- IDE & OS Files ---
+.vs/
+.vscode/
+.idea/
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*.bak
+*.tmp
+.DS_Store
 
-# .Net specific
-/bin
-/obj
-/appsettings.json
-/appsettings.Development.json
+## --- .NET Specific ---
+**/[Bb]in/
+**/[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# Exclude local environment secrets but KEEP the main config
+appsettings.Development.json
+.env
+
+## --- Angular / Node.js ---
+**/node_modules/
+**/dist/
+.angular/
+.npm/
+# package-lock.json is removed from here because it SHOULD be tracked
+
+## --- Others ---
+.DS_Store
