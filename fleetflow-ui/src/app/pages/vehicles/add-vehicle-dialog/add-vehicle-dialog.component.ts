@@ -71,9 +71,14 @@ import { MatIconModule } from '@angular/material/icon';
     </mat-dialog-actions>
   `,
   styles: [`
-    .premium-form { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+    .premium-form { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
     .form-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .cancel-btn { color: #94a3b8; margin-right: 8px; }
+    .cancel-btn { color: var(--text-muted); font-weight: 500; }
+    
+    ::ng-deep .mat-mdc-dialog-container { padding: 0 !important; }
+    
+    mat-form-field { width: 100%; }
+    mat-icon { font-size: 20px; width: 20px; height: 20px; }
   `]
 })
 export class AddVehicleDialogComponent {
