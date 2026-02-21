@@ -128,7 +128,17 @@ import { TripsService } from '../../../services/trips.service';
                       <span class="asset-pill"><mat-icon>person</mat-icon> {{trip.driverName}}</span>
                     </div>
                  </div>
-                 <div class="trip-badge">ACTIVE</div>
+                 <div class="trip-actions">
+                   <div class="trip-badge">ACTIVE</div>
+                   <button
+                     mat-stroked-button
+                     class="btn-complete"
+                     [disabled]="completingTripId === getTripId(trip)"
+                     (click)="completeTrip(trip)"
+                   >
+                     {{ completingTripId === getTripId(trip) ? 'Completing...' : 'Complete Trip' }}
+                   </button>
+                 </div>
               </div>
               
               <div *ngIf="activeTrips.length === 0" class="monitor-empty">
@@ -202,6 +212,14 @@ import { TripsService } from '../../../services/trips.service';
     .asset-pill mat-icon { font-size: 14px; width: 14px; height: 14px; color: #94a3b8; }
     
     .trip-badge { font-size: 0.65rem; font-weight: 800; color: #4ade80; padding: 4px 8px; border: 1px solid rgba(74, 222, 128, 0.2); border-radius: 6px; letter-spacing: 0.05em; }
+    .trip-actions { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+    .btn-complete {
+      color: var(--text-primary) !important;
+      border-color: var(--border-color) !important;
+      background: rgba(255, 255, 255, 0.04) !important;
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
 
     .monitor-empty { padding: 64px 24px; text-align: center; color: #64748b; }
     .monitor-empty mat-icon { font-size: 48px; width: 48px; height: 48px; color: #1e293b; margin-bottom: 16px; }
@@ -232,6 +250,7 @@ export class TripDispatchComponent implements OnInit {
   availableDrivers: any[] = [];
   activeTrips: any[] = [];
   isSubmitting = false;
+  completingTripId: number | null = null;
 
   ngOnInit() {
     this.refreshData();
@@ -263,5 +282,41 @@ export class TripDispatchComponent implements OnInit {
         }
       });
     }
+  }
+
+  getTripId(trip: any): number {
+    return Number(trip?.id ?? trip?.Id ?? 0);
+  }
+
+  completeTrip(trip: any) {
+    const tripId = this.getTripId(trip);
+    if (!tripId) {
+      alert('Trip ID is missing. Cannot complete this trip.');
+      return;
+    }
+
+    const endOdometerInput = window.prompt('Enter end odometer (km):');
+    if (endOdometerInput === null) {
+      return;
+    }
+
+    const endOdometer = Number(endOdometerInput);
+    if (!Number.isFinite(endOdometer) || endOdometer <= 0) {
+      alert('Please enter a valid odometer value.');
+      return;
+    }
+
+    this.completingTripId = tripId;
+    this.tripsService.complete(tripId, endOdometer).subscribe({
+      next: () => {
+        this.completingTripId = null;
+        this.refreshData();
+      },
+      error: (err) => {
+        this.completingTripId = null;
+        console.error(err);
+        alert(typeof err?.error === 'string' ? err.error : 'Failed to complete trip.');
+      }
+    });
   }
 }

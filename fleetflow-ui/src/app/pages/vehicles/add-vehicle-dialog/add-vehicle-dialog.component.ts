@@ -73,20 +73,11 @@ import { VehiclesService } from '../../../services/vehicles.service';
   styles: [`
     .premium-form { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
     .form-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-<<<<<<< HEAD
     .cancel-btn { color: var(--text-muted); margin-right: 8px; }
     
     @media (max-width: 480px) {
       .form-row-grid { grid-template-columns: 1fr; }
     }
-=======
-    .cancel-btn { color: var(--text-muted); font-weight: 500; }
-    
-    ::ng-deep .mat-mdc-dialog-container { padding: 0 !important; }
-    
-    mat-form-field { width: 100%; }
-    mat-icon { font-size: 20px; width: 20px; height: 20px; }
->>>>>>> 2b0ca3006f03b67a707c6508bd02df5a5c3092c7
   `]
 })
 export class AddVehicleDialogComponent {
